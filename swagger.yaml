@@ -1,0 +1,443 @@
+swagger: "2.0"
+info:
+  version: 0.0.0
+  title: Free spaced api
+  description: The Api for the free spaced application
+host: "localhost"
+basePath: "/"
+
+tags:
+  - name: Auth
+    description: Auth API
+
+paths:
+  #[POST] auth
+  /signup:
+    post:
+      tags:
+        - Auth
+      summary: Register New User
+      parameters:
+        - name: body
+          in: body
+          description: user Data
+          required: true
+          schema:
+            $ref: "#/definitions/users"
+      responses:
+        201:
+          description: "Created"
+          schema:
+            $ref: "#/definitions/signuprespose"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/errormessage"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/errormessage"
+        409:
+          description: "Conflict"
+          schema:
+            $ref: "#/definitions/errormessage"
+        500:
+          description: "Server Error"
+          schema:
+            $ref: "#/definitions/errormessage"
+  #[GET] auth
+  /me:
+    get:
+      tags:
+        - Auth
+      summary: Get Auth User Data
+      responses:
+        200:
+          description: "An Object of Auth user data"
+        500:
+          description: "Server Error"
+
+  #[POST] auth
+  /login:
+    post:
+      tags:
+        - Auth
+      summary: Login user
+      parameters:
+        - name: body
+          in: body
+          description: user Data
+          required: true
+          schema:
+            $ref: "#/definitions/users"
+      responses:
+        200:
+          description: "Ok"
+          schema:
+            $ref: "#/definitions/signuprespose"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/errormessage"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/errormessage"
+        409:
+          description: "Conflict"
+          schema:
+            $ref: "#/definitions/errormessage"
+        500:
+          description: "Server Error"
+          schema:
+            $ref: "#/definitions/errormessage"
+
+  #[POST] auth
+  /post/create:
+    post:
+      tags:
+        - Post
+      summary: Create post
+      parameters:
+        - name: body
+          in: body
+          description: Create a post
+          required: true
+          schema:
+            $ref: "#/definitions/createpostbody"
+      responses:
+        200:
+          description: "Ok"
+          schema:
+            $ref: "#/definitions/createpostresponse"
+        404:
+          description: "Not Found"
+        400:
+          description: "Bad Request"
+        409:
+          description: "Conflict"
+        500:
+          description: "Server Error"
+  #[POST] auth
+  /post/like:
+    post:
+      tags:
+        - Post
+      summary: Like post
+      parameters:
+        - name: body
+          in: body
+          description: Create a post
+          required: true
+          schema:
+            $ref: "#/definitions/createpostbody"
+      responses:
+        200:
+          description: "Ok"
+          schema:
+            $ref: "#/definitions/createpostresponse"
+        404:
+          description: "Not Found"
+        400:
+          description: "Bad Request"
+        409:
+          description: "Conflict"
+        500:
+          description: "Server Error"
+
+  #[POST] auth
+  /post/unlike:
+    post:
+      tags:
+        - Post
+      summary: Create post
+      parameters:
+        - name: body
+          in: body
+          description: Create a post
+          required: true
+          schema:
+            $ref: "#/definitions/createpostbody"
+      responses:
+        200:
+          description: "Ok"
+          schema:
+            $ref: "#/definitions/createpostresponse"
+        404:
+          description: "Not Found"
+        400:
+          description: "Bad Request"
+        409:
+          description: "Conflict"
+        500:
+          description: "Server Error"
+  # [GET] storiest
+  /post:
+    get:
+      tags:
+        - Post
+      summary: Find All Stories
+      responses:
+        200:
+          description: "An List of all Stories in the datebase"
+
+        500:
+          description: "Server Error"
+
+  # [GET] users/id
+  /post/{id}:
+    get:
+      tags:
+        - Post
+      summary: Find post By Id
+      parameters:
+        - name: id
+          in: path
+          description: post Id
+          required: true
+          type: string
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Server Error"
+
+      # [DELETE] users/id
+    delete:
+      tags:
+        - Post
+      summary: Delete post By Id
+      parameters:
+        - name: id
+          in: path
+          description: post Id
+          required: true
+          type: integer
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Server Error"
+
+# # [GET] users
+#   /users:
+#     get:
+#       tags:
+#       - users
+#       summary: Find All Users
+#       responses:
+#         200:
+#           description: 'OK'
+#         500:
+#           description: 'Server Error'
+
+# # [POST] users
+# post:
+#   tags:
+#   - users
+#   summary: Add User
+#   parameters:
+#   - name: body
+#     in: body
+#     description: user Data
+#     required: true
+#     schema:
+#       $ref: '#/definitions/users'
+#   responses:
+#     201:
+#       description: 'Created'
+#     400:
+#       description: 'Bad Request'
+#     409:
+#       description: 'Conflict'
+#     500:
+#       description: 'Server Error'
+
+# # [GET] users/id
+#   /users/{id}:
+#     get:
+#       tags:
+#       - users
+#       summary: Find User By Id
+#       parameters:
+#       - name: id
+#         in: path
+#         description: User Id
+#         required: true
+#         type: integer
+#       responses:
+#         200:
+#           description: 'OK'
+#         409:
+#           description: 'Conflict'
+#         500:
+#           description: 'Server Error'
+
+# # [PUT] users/id
+#     put:
+#       tags:
+#       - users
+#       summary: Update User By Id
+#       parameters:
+#       - name: id
+#         in: path
+#         description: user Id
+#         required: true
+#         type: integer
+#       - name: body
+#         in: body
+#         description: user Data
+#         required: true
+#         schema:
+#           $ref: '#/definitions/users'
+#       responses:
+#         200:
+#           description: 'OK'
+#         400:
+#           description: 'Bad Request'
+#         409:
+#           description: 'Conflict'
+#         500:
+#           description: 'Server Error'
+
+# definitions
+definitions:
+  createpostresponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+        description: true or false
+      payload:
+        type: object
+        properties:
+          Id:
+            type: string
+            description: post Id
+          title:
+            type: string
+            description: The title of the post
+          text:
+            type: string
+            description: body of the post
+          tags:
+            type: array
+            items:
+              type: string
+            description: an array of string,e.g ["love", "peace"]
+          allow_therapist:
+            type: boolean
+            description: "true | false"
+          creatorId:
+            type: string
+            description: "user Id"
+          contributors:
+            type: string
+            description: "null"
+          views:
+            type: string
+            description: "null"
+          share:
+            type: string
+            description: "null"
+          is_spacecare:
+            type: boolean
+            description: "true | false"
+          createdAt:
+            type: string
+            description: ddd
+
+  createpostbody:
+    type: object
+    required:
+      - text
+      - postId
+      - creatorId
+    properties:
+      text:
+        type: string
+        description: The Body of the post
+
+      postId:
+        type: number
+        description: "1"
+      creatorId:
+        type: number
+        description: "1"
+
+  forgotpasswordres:
+    type: object
+    properties:
+      success:
+        type: boolean
+      payload:
+        type: object
+        properties:
+          message:
+            type: string
+            description: email sent
+
+  errormessage:
+    type: object
+    properties:
+      success:
+        type: boolean
+        description: "true | false"
+      message:
+        type: string
+        description: a message showing the cause of the error
+  signuprespose:
+    type: object
+    properties:
+      success:
+        type: boolean
+        description: true or false
+      payload:
+        type: object
+        properties:
+          Id:
+            type: number
+            description: user id
+          email:
+            type: string
+            description: user email
+  changepassword:
+    type: object
+    required:
+      - token
+      - newPassword
+    properties:
+      token:
+        type: string
+        description: token created and sent to user's email
+      newPassword:
+        type: string
+        description: user's new Password
+  forgot:
+    type: string
+    required:
+      - email
+    properties:
+      email:
+        type: string
+        description: user email
+  users:
+    type: object
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+        description: user Email
+      password:
+        type: string
+        description: user Password
+
+schemes:
+  - https
+  - http
