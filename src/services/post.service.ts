@@ -8,7 +8,9 @@ class PostService {
 	private post = postModel;
 	private likeModel = Like;
 	public async getAllStories(): Promise<Post[]> {
-		const stories = await this.post.find();
+		const stories = await this.post.find({
+			relations: ['comments', 'comments.creator', 'creator', 'likes'],
+		});
 		return stories;
 	}
 	public async getPostById(id: string): Promise<Post> {
