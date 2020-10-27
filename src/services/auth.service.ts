@@ -7,6 +7,7 @@ import { User } from '../interfaces/users.interface';
 import { UserModel as userModel } from '../models/users.model';
 import { isEmptyObject } from '../utils/util';
 import { JWT_SECRET, __prod__ } from '../config';
+import { sendMessage } from '../utils/sendMail';
 class AuthService {
 	public users = userModel;
 	public async signup(
@@ -33,7 +34,7 @@ class AuthService {
 		};
 		const res = await this.users.create(createUserData).save();
 		const tokenData = this.createToken(res);
-
+		await sendMessage(userData.email);
 		return { findUser: res, token: tokenData.token };
 	}
 

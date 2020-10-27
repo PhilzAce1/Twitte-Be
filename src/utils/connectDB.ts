@@ -5,9 +5,8 @@ import { Comment } from '../models/comment.model';
 import { Like } from '../models/like.model';
 import { __prod__ } from '../config';
 
-async function connect() {
+export async function connect() {
 	const connectionOptions = await getConnectionOptions(process.env.NODE_ENV);
-
 	return process.env.NODE_ENV === 'production'
 		? createConnection({
 				...connectionOptions,
@@ -37,3 +36,7 @@ export async function database() {
 		}
 	}
 }
+
+// export const createTypeormConn = async () => {
+// 	const connect
+// };

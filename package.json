@@ -8,7 +8,8 @@
     "dev": "cross-env NODE_ENV=development nodemon dist/server",
     "dev2": "cross-env NODE_ENV=development nodemon --watch src  --exec 'ts-node' src/server.ts",
     "build": "tsc",
-    "test": "jest --forceExit --detectOpenHandles",
+    "test-server":"cross-env NODE_ENV=test ts-node src/server.ts",
+    "test": "cross-env NODE_ENV=test cross-env JWT_SECRET=jwt_secret jest  --detectOpenHandles",
     "lint": "tslint -p tsconfig.json -c tslint.json"
   },
   "dependencies": {

@@ -1,9 +1,20 @@
-// import * as request from 'supertest';
+// import request from 'supertest';
 // import App from '../app';
 // import { User } from '../interfaces/users.interface';
 // import userModel from '../models/users.model';
 // import UserRoute from '../routes/users.route';
 // import { CreateUserDto } from 'dtos/users.dto';
+
+// describe('[GET] /users', () => {
+// 	it('response statusCode 200 / findAll', () => {
+// 		const usersRoute = new UserRoute();
+// 		const app = new App([usersRoute]);
+
+// 		return request(app.getServer())
+// 			.get(`${usersRoute.path}`)
+// 			.expect(200, { data: findUser, message: 'findAll' });
+// 	});
+// });
 
 // afterAll(async () => {
 //   await new Promise(resolve => setTimeout(() => resolve(), 500));

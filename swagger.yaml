@@ -45,17 +45,6 @@ paths:
           description: "Server Error"
           schema:
             $ref: "#/definitions/errormessage"
-  #[GET] auth
-  /me:
-    get:
-      tags:
-        - Auth
-      summary: Get Auth User Data
-      responses:
-        200:
-          description: "An Object of Auth user data"
-        500:
-          description: "Server Error"
 
   #[POST] auth
   /login:
@@ -92,7 +81,7 @@ paths:
           schema:
             $ref: "#/definitions/errormessage"
 
-  #[POST] auth
+  #[POST] post
   /post/create:
     post:
       tags:
@@ -130,7 +119,7 @@ paths:
           description: Create a post
           required: true
           schema:
-            $ref: "#/definitions/createpostbody"
+            $ref: "#/definitions/likebody"
       responses:
         200:
           description: "Ok"
@@ -157,7 +146,7 @@ paths:
           description: Create a post
           required: true
           schema:
-            $ref: "#/definitions/createpostbody"
+            $ref: "#/definitions/unlikebody"
       responses:
         200:
           description: "Ok"
@@ -172,7 +161,7 @@ paths:
         500:
           description: "Server Error"
   # [GET] storiest
-  /post:
+  /post/:
     get:
       tags:
         - Post
@@ -181,26 +170,6 @@ paths:
         200:
           description: "An List of all Stories in the datebase"
 
-        500:
-          description: "Server Error"
-
-  # [GET] users/id
-  /post/{id}:
-    get:
-      tags:
-        - Post
-      summary: Find post By Id
-      parameters:
-        - name: id
-          in: path
-          description: post Id
-          required: true
-          type: string
-      responses:
-        200:
-          description: "OK"
-        409:
-          description: "Conflict"
         500:
           description: "Server Error"
 
@@ -222,7 +191,32 @@ paths:
           description: "Conflict"
         500:
           description: "Server Error"
-
+  #[POST] auth
+  /comment/create:
+    post:
+      tags:
+        - Post
+      summary: Create post
+      parameters:
+        - name: body
+          in: body
+          description: Create a post
+          required: true
+          schema:
+            $ref: "#/definitions/createpostbody"
+      responses:
+        200:
+          description: "Ok"
+          schema:
+            $ref: "#/definitions/createpostresponse"
+        404:
+          description: "Not Found"
+        400:
+          description: "Bad Request"
+        409:
+          description: "Conflict"
+        500:
+          description: "Server Error"
 # # [GET] users
 #   /users:
 #     get:
@@ -324,29 +318,7 @@ definitions:
           text:
             type: string
             description: body of the post
-          tags:
-            type: array
-            items:
-              type: string
-            description: an array of string,e.g ["love", "peace"]
-          allow_therapist:
-            type: boolean
-            description: "true | false"
-          creatorId:
-            type: string
-            description: "user Id"
-          contributors:
-            type: string
-            description: "null"
-          views:
-            type: string
-            description: "null"
-          share:
-            type: string
-            description: "null"
-          is_spacecare:
-            type: boolean
-            description: "true | false"
+
           createdAt:
             type: string
             description: ddd
@@ -366,6 +338,28 @@ definitions:
         type: number
         description: "1"
       creatorId:
+        type: number
+        description: "1"
+
+  likebody:
+    type: object
+    required:
+      - postId
+      - creatorId
+    properties:
+      postId:
+        type: number
+        description: "1"
+      creatorId:
+        type: number
+        description: "1"
+
+  unlikebody:
+    type: object
+    required:
+      - likeId
+    properties:
+      likeId:
         type: number
         description: "1"
 

@@ -11,6 +11,7 @@ function errorMiddleware(
 	const message: string = error.message || 'Something went wrong';
 	const success: boolean = error.success || false;
 	console.error('[ERROR] ', status, message);
+	console.error(error);
 	res.status(status).json({ success, message });
 }
 
