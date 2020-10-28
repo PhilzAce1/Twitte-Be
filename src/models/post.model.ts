@@ -21,15 +21,15 @@ export class Post extends BaseEntity {
 	text: string;
 
 	@OneToMany(() => Like, (likes) => likes.post, {
-		cascade: true,
+		cascade: ['insert', 'update', 'remove'],
 		nullable: true,
 	})
 	@JoinTable()
 	likes: Like[];
 
 	@OneToMany(() => Comment, (comment) => comment.post, {
-		cascade: true,
 		nullable: true,
+		onDelete: 'CASCADE',
 	})
 	@JoinTable()
 	comments: Comment[];
