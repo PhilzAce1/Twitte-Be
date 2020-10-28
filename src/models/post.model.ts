@@ -21,7 +21,8 @@ export class Post extends BaseEntity {
 	text: string;
 
 	@OneToMany(() => Like, (likes) => likes.post, {
-		cascade: ['insert', 'update', 'remove'],
+		onDelete: 'CASCADE',
+
 		nullable: true,
 	})
 	@JoinTable()
